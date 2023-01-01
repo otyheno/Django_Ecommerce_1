@@ -3,6 +3,12 @@
 {% block title %} {{product.title}} {% endblock %}
 
 {% block content %}
+
+    {% if product.image %}
+        <div class="image mb-4">
+            <img src="{{product.image.url}}" alt="{{product.title}} Image">
+        </div>
+    {% endif %}
     <h1 class="text-2xl">{{product.title}}</h1>
 
     <p class="text-xs text-gray-500">Ksh: {{product.price}} - {% firstof product.user.get_full_name product.user.username %}</p>

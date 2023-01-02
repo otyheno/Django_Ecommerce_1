@@ -12,6 +12,12 @@
             <div class="logo">
                 <a href="/" class="text-white text-2xl">ECOMM</a>
             </div>
+            <div class="search">
+                <form method="get" action="/search/">
+                    <input type="search" name="query" placeholder="Search..." autocomplete="off">
+                    <button>Search</button>
+                </form>
+            </div>
             <div class="menu flex space-x-4">
                 {% menu %}
                 {% if request.user.is_authenticated %}

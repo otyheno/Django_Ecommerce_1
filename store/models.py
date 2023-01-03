@@ -23,6 +23,20 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/product_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    DRAFT = 'draft'
+    WAITING_APPROVAL = 'waiting_approval'
+    ACTIVE = 'active'
+    DELETED = 'deleted'
+    
+    STATUS_CHOICES = (
+        (DRAFT, 'Draft'),
+        (WAITING_APPROVAL, 'Waiting Approval'),
+        (ACTIVE, 'Active'),
+        (DELETED, 'Deleted'),
+    )
+    
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=ACTIVE)
 
     class Meta:
         ordering = ('-created_at', )

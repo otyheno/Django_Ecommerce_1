@@ -18,7 +18,10 @@ def vendorDetail(request, pk):
 
 @login_required
 def myStore(request):
-    return render(request, 'userprofile/my_store.html')
+    products = request.user.products.exclude(status=Product.DELETED)
+    return render(request, 'userprofile/my_store.html', {
+        'products': products
+    })
 
 @login_required
 def addProduct(request):

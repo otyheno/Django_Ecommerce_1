@@ -14,7 +14,11 @@ from store.models import Product
 
 def vendorDetail(request, pk):
     user = User.objects.get(pk=pk)
-    return render(request, 'userprofile/vendor_detail.html', {'user': user})
+    products = user.products.filter(status=Product.ACTIVE)
+    return render(request, 'userprofile/vendor_detail.html', {
+        'user': user,
+        'products': products
+        })
 
 @login_required
 def myStore(request):

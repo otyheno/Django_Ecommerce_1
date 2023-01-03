@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from .models import UserProfile
 
 from store.forms import ProductForm
+from store.models import Product
 
 # Create your views here.
 
@@ -32,7 +33,27 @@ def addProduct(request):
             return redirect('my_store')
     else:
         form = ProductForm()
-    return render(request, 'userprofile/add_product.html', {'form': form})
+    return render(request, 'userprofile/add_product.html', {
+        'title': 'Add Product',
+        'form': form
+        })
+
+@login_required
+def editProduct(request, pk):
+    product = Product.objects.filter(user=request.user).get(pk=pk)
+    form = ProductForm(instance=product)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('my_store')
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'userprofile/add_product.html', {
+        'title': 'Edit Product',
+        'form': form
+        })
+
 
 def signUp(request):
     if request.method == 'POST':

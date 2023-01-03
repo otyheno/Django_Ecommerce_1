@@ -14,6 +14,12 @@
 
         <button class="py-4 px-8 bg-teal-500 text-white hover:bg-teal-800">Submit</button>
 
-    </form>    
+    </form>
+    
+    {% if title == 'Edit Product' %}        
+        <a class="mt-2 inline-block py-4 px-8 bg-red-500 text-white" href="">Delete Product</a></div>
+    {% endif %}
+
+
     
 {% endblock %}

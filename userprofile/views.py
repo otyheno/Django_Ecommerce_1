@@ -45,7 +45,7 @@ def addProduct(request):
 @login_required
 def editProduct(request, pk):
     product = Product.objects.filter(user=request.user).get(pk=pk)
-    form = ProductForm(instance=product)
+    #form = ProductForm(instance=product)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -60,6 +60,10 @@ def editProduct(request, pk):
         'title': 'Edit Product',
         'form': form
         })
+    
+@login_required
+def deleteProduct(request, pk):
+    product = Product.objects.filter(user=request.user).get(pk=pk)
 
 
 def signUp(request):

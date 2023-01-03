@@ -58,12 +58,19 @@ def editProduct(request, pk):
         form = ProductForm(instance=product)
     return render(request, 'userprofile/add_product.html', {
         'title': 'Edit Product',
+        'product': product,
         'form': form
         })
     
 @login_required
 def deleteProduct(request, pk):
     product = Product.objects.filter(user=request.user).get(pk=pk)
+    product.status = Product.DELETED
+    product.save()
+    
+    messages.success(request, "Product deleted successfully")
+    
+    return redirect('my_store')
 
 
 def signUp(request):

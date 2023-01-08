@@ -32,4 +32,14 @@ def addToCart(request, product_id):
     cart = Cart(request)
     cart.add(product_id)
 
-    return redirect('frontpage')
+    return redirect('cart')
+
+def removeFromCart(request, product_id):
+    cart = Cart(request)
+    cart.remove(product_id)
+    return redirect('cart')
+
+
+def cartView(request):
+    cart = Cart(request)
+    return render(request,'store/cart_view.html', {'cart': cart})
